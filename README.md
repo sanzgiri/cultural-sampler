@@ -2,6 +2,8 @@
 
 **Live prototype:** https://cultural-sampler.vercel.app
 
+Deployment status and remaining work: [`docs/next-steps.md`](docs/next-steps.md)
+
 **The Weekly Margin** is a separate personal app: a finite weekly selection of **books, music and films**, authorized previews when available, and visible/editable taste learning.
 
 > A small edition of things worth carrying into the week.
