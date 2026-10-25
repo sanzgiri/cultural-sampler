@@ -1,0 +1,41 @@
+{
+  "status": "implementation-plan-ready-for-review",
+  "execution_model": "luna med",
+  "implementation_authorized": false,
+  "project_directory": "/Users/sanzgiri/projects/cultural-sampler",
+  "separate_from": "eg-news / Wider",
+  "goal": "A private cross-device weekly book/music/film sampler with authorized previews and transparent deterministic taste learning.",
+  "spec": "docs/superpowers/specs/2026-10-06-cultural-sampler-v1-design.md",
+  "implementation_plan": "docs/superpowers/plans/2026-10-06-cultural-sampler-v1.md",
+  "handoff": "HANDOFF.md",
+  "scope_exclusions": ["Jev", "LLMs", "YouTube Data API", "live media-account OAuth histories", "news", "infinite scroll", "free-only selection"],
+  "planning_checklist": {
+    "context_and_reusable_code_inspected": true,
+    "user_intent_and_scope_recorded": true,
+    "alternatives_and_recommendation_presented": true,
+    "v1_written_design_created": true,
+    "concrete_tasks_interfaces_and_tests_written": true,
+    "self_review_completed": true,
+    "user_written_artifact_review": "pending",
+    "user_model_switch": "pending",
+    "implementation": "in-progress; vertical slice ready"
+  },
+  "tasks": [
+    {"id":"T1","status":"complete","description":"Create independently testable app foundation and shared domain contracts","expected_output":"Pinned lockfile, validated env, minimal app shell, passing foundation checks","prerequisites":[]},
+    {"id":"T2","status":"pending","description":"Implement fail-closed GitHub allowlisted auth and same-origin request guards","expected_output":"Personal endpoints deny absent/disallowed sessions and missing auth configuration","prerequisites":["T1"]},
+    {"id":"T3","status":"pending","description":"Implement migrations, owner-qualified repositories and privacy deletion","expected_output":"Transactional persistence with tested isolation and deletion","prerequisites":["T2"]},
+    {"id":"T4","status":"pending","description":"Implement domain validation and review-first history parsing","expected_output":"Generic/IMDb/library fixtures parsed without false taste or identity inference","prerequisites":["T3"]},
+    {"id":"T5","status":"pending","description":"Implement bounded catalog lookup, cache, approved ingestion and minimal booklist import","expected_output":"Verified canonical metadata, pending ambiguous records, quota-safe adapters","prerequisites":["T4"]},
+    {"id":"T6","status":"partial","description":"Implement pure per-medium taste, diversity selection, reasons and local-week rules","expected_output":"Deterministic scoring independent of samples/free access with grounded explanations","prerequisites":["T5"]},
+    {"id":"T7","status":"pending","description":"Implement authorized sample/access resolution and cache prewarming","expected_output":"TMDB trailer IDs, Google Books links and iTunes samples without search/model API","prerequisites":["T5"]},
+    {"id":"T8","status":"pending","description":"Probe real capabilities and ingest at least 30 reviewed works per medium","expected_output":"Actual identity/playback/terms report and diverse live starter corpus","prerequisites":["T7"]},
+    {"id":"T9","status":"pending","description":"Implement checkpointed lease-fenced weekly publication","expected_output":"One atomic stable edition per local week using cached sample metadata","prerequisites":["T6","T8"]},
+    {"id":"T10","status":"partial","description":"Implement complete private UI, feedback, imports, saved works and learning","expected_output":"Cross-device finite edition and editable source-tagged learning with deletion/export","prerequisites":["T9"]},
+    {"id":"T11","status":"pending","description":"Audit release and deploy only with explicit approval","expected_output":"Passing unit/integration/e2e/build checks and real independent production verification","prerequisites":["T10"]}
+  ],
+  "critical_path":["T1","T2","T3","T4","T5","T7","T8","T9","T10","T11"],
+  "parallel_groups":[["T6","T7"]],
+  "success_criteria": ["Correct canonical identities and samples", "No preview/free-access ranking bias", "Evidence-specific taste counts and uncertainty", "Same private profile across devices", "No provider calls on ordinary page refresh", "Deletion clears source-derived personal snapshots", "No model or YouTube Data API calls", "Actual live verification before deployment claims"],
+  "external_inputs": ["User review/model switch", "Approved valid TMDB credentials", "Optional Google Books quota key", "App-specific GitHub OAuth client and allowed numeric user ID", "Dedicated Postgres database", "User-provided history files if available", "Reviewed curator/source corpus", "Permission for external deployment/repository creation"],
+  "deferred": ["Jev evaluation", "YouTube Data API search", "Trakt/Last.fm/Apple Music account connectors", "Spotify functionality subject to policy review", "Automatic bulk editorial source ingestion", "Public self-service"]
+}

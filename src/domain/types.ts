@@ -1,0 +1,9 @@
+export type Medium = 'book' | 'music' | 'film';
+export type ObservationKind = 'positive' | 'negative' | 'neutral' | 'known' | 'borrowed' | 'viewed' | 'finished' | 'defer';
+export type ProfileStatus = 'untested' | 'tentative' | 'supported-interest' | 'supported-aversion';
+export type Work = { id:string; medium:Medium; title:string; creators:string[]; primaryCreatorKey:string; franchiseKey:string|null; primaryGenre:string|null; traits:string[]; language:string|null; originRegions:string[]; releaseYear:number|null; musicSubtype:'album'|'recording'|null; verifiedIdentifiers:Record<string,string> };
+export type QualityEvidence = { workId:string; sourceUrl:string; sourceType:string; statement:string; verified:boolean; observedAt:string; score:0.8|0.7|0.5 };
+export type Observation = { id:string; ownerId:string; workId:string; sourceId:string|null; kind:ObservationKind; occurredAt:string; createdAt:string; deferUntil?:string };
+export type TraitProfile = { positive:number; negative:number; score:number; status:ProfileStatus; supportingPositive:string[]; supportingNegative:string[] };
+export type Profile = Record<Medium, Record<string, TraitProfile>>;
+export type ScoredCandidate = { work:Work; fit:number; quality:number; baseScore:number };
